@@ -25,7 +25,7 @@ def process(upc):
   if upc == '00537377':
     threading.Thread(target=blink, kwargs={'pin': 13}).start()
     return 'blue'
-  if upc == '00490344':
+  if upc == '00673051':
     threading.Thread(target=blink, kwargs={'pin': 15}).start()
     return 'green'
   return 'FAIL'
