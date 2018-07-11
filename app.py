@@ -31,7 +31,7 @@ def process(upc):
   return 'FAIL'
 
 def blink(pin):
-  for _ in range(30):
+  for _ in range(5):
     GPIO.output(pin, GPIO.HIGH)
     time.sleep(1)
     GPIO.output(pin, GPIO.LOW)
