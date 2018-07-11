@@ -1,6 +1,11 @@
 
-import RPi as RPi
-GPIO = RPi.GPIO
+try:
+  import RPi.GPIO as GPIO
+except:
+  print("fallingback")
+  import RPi as RPi
+  GPIO = RPi.GPIO
+
 from flask import Flask
 
 import threading
@@ -26,8 +31,9 @@ def process(upc):
   return 'FAIL'
 
 def blink(pin):
-  GPIO.output(pin, GPIO.HIGH)
-  time.sleep(1)
-  GPIO.output(pin, GPIO.LOW)
+  for _ in range(30):
+    GPIO.output(pin, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(pin, GPIO.LOW)
 
 app.run(debug=True)
