@@ -11,7 +11,7 @@ from flask import Flask
 import threading
 import time
 
-GPIO.setmode(GPIO.BOARD) # now use the fake GPIO
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,13,15], GPIO.OUT, initial=GPIO.LOW)
 
 
@@ -35,5 +35,6 @@ def blink(pin):
     GPIO.output(pin, GPIO.HIGH)
     time.sleep(1)
     GPIO.output(pin, GPIO.LOW)
+    time.sleep(1)
 
 app.run(debug=True)
