@@ -19,15 +19,15 @@ app = Flask(__name__)
 
 @app.route('/<string:upc>', methods=['GET'])
 def process(upc):
-  if upc == 'T1':
+  if upc == '00332408':
     threading.Thread(target=blink, kwargs={'pin': 11}).start()
     return 'white'
-  if upc == 'T2':
+  if upc == '00537377':
     threading.Thread(target=blink, kwargs={'pin': 13}).start()
-    return 'green'
-  if upc == 'T3':
-    threading.Thread(target=blink, kwargs={'pin': 15}).start()
     return 'blue'
+  if upc == '00490344':
+    threading.Thread(target=blink, kwargs={'pin': 15}).start()
+    return 'green'
   return 'FAIL'
 
 def blink(pin):
