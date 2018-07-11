@@ -3,6 +3,9 @@ import RPi as RPi
 GPIO = RPi.GPIO
 from flask import Flask
 
+import threading
+import time
+
 GPIO.setmode(GPIO.BOARD) # now use the fake GPIO
 GPIO.setup([11,13,15], GPIO.OUT, initial=GPIO.LOW)
 
@@ -12,17 +15,19 @@ app = Flask(__name__)
 @app.route('/<string:upc>', methods=['GET'])
 def process(upc):
   if upc == 'T1':
-    blink(11)
+    threading.Thread(target=blink, kwargs={'pin': 11}).start()
     return 'white'
   if upc == 'T2':
-    blink(13)
+    threading.Thread(target=blink, kwargs={'pin': 13}).start()
     return 'green'
   if upc == 'T3':
-    blink(15)
+    threading.Thread(target=blink, kwargs={'pin': 15}).start()
     return 'blue'
   return 'FAIL'
 
-def blink(id):
-    GPIO.output(id, GPIO.HIGH)
+def blink(pin):
+  GPIO.output(pin, GPIO.HIGH)
+  time.sleep(1)
+  GPIO.output(pin, GPIO.LOW)
 
 app.run(debug=True)
